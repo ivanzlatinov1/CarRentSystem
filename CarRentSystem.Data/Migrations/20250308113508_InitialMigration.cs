@@ -54,8 +54,8 @@ namespace CarRentSystem.Data.Migrations
                 {
                     CarId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    RentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ReturnDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -75,14 +75,16 @@ namespace CarRentSystem.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Rents_CarId",
+                table: "Rents",
+                column: "CarId",
+                unique: true,
+                filter: "ReturnDate IS NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Rents_UserId",
                 table: "Rents",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Rents_CarId",
-                table: "Rents",
-                column: "CarId");
         }
 
         /// <inheritdoc />

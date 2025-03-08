@@ -46,6 +46,12 @@
                     .WithMany(c => c.Rents)
                     .HasForeignKey(r => r.CarId)
                     .OnDelete(DeleteBehavior.Restrict);
+
+                // Unique index for cars whose return date is null
+                entity
+                    .HasIndex(r => new { r.CarId })
+                    .HasFilter("ReturnDate IS NULL")
+                    .IsUnique();
             });
 
             modelBuilder.Entity<User>()

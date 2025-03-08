@@ -68,13 +68,17 @@ namespace CarRentSystem.Data.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("EndDate")
+                    b.Property<DateTime>("RentDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("StartDate")
+                    b.Property<DateTime?>("ReturnDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("CarId", "UserId");
+
+                    b.HasIndex("CarId")
+                        .IsUnique()
+                        .HasFilter("ReturnDate IS NULL");
 
                     b.HasIndex("UserId");
 

@@ -17,8 +17,8 @@ namespace CarRentSystem.Data.Entities
         public virtual User User { get; set; } = null!;
 
         [Required]
-        public DateTime StartDate { get; set; }
+        public DateTime RentDate { get; set; }
 
-        public DateTime? EndDate { get; set; }
+        public DateTime? ReturnDate { get; set; }
     }
 }
