@@ -8,8 +8,8 @@ namespace CarRentSystem.Data.Repositories.Contracts
         public Task CreateAsync(T entity);
         public Task UpdateAsync(T entity);
         public Task DeleteAsync(T entity);
-        public Task GetAllAsync();
-        public Task<T> GetByIdAsync(int id);
-        public Task<T> GetByFilter(Expression<Predicate<string>> filter);
+        public Task<ICollection<T>> GetAllAsync();
+        public Task<T?> GetByIdAsync(int id);
+        public ICollection<T> GetByFilter(Expression<Func<T, bool>> filter);
     }
 }
