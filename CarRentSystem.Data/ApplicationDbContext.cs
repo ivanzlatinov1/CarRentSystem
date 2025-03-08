@@ -46,13 +46,17 @@
                     .WithMany(c => c.Rents)
                     .HasForeignKey(r => r.CarId)
                     .OnDelete(DeleteBehavior.Restrict);
-
-                // Index for cars whose ReturnDate is set to NULL
-                entity
-                    .HasIndex(r => new { r.CarId })
-                    .HasFilter("ReturnDate IS NULL")
-                    .IsUnique();
             });
+
+            modelBuilder.Entity<User>()
+                .Property(u => u.EGN)
+                .HasColumnType("char")
+                .HasMaxLength(10);
+
+            modelBuilder.Entity<Car>()
+                .Property(c => c.Price)
+                .HasColumnType("decimal")
+                .HasPrecision(18, 2);
 
             base.OnModelCreating(modelBuilder);
         }

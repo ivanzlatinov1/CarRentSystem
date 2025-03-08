@@ -23,7 +23,6 @@ namespace CarRentSystem.Data.Entities
         [MaxLength(MaxUserNameLength)]
         public string? LastName { get; set; }
 
-        [Column("char(10)")]
         public string? EGN {get; set; }
 
         public string? PhoneNumber { get; set; }

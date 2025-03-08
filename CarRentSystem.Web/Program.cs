@@ -1,4 +1,4 @@
-using CarRentSystem.Web.Data;
+using CarRentSystem.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
