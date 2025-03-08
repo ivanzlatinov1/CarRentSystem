@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35728.132 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRentSystem.Web", "CarRentSystem.Web\CarRentSystem.Web.csproj", "{DC79AF9A-A8C7-439B-B7FC-98823F0CC7A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRentSystem.Data", "CarRentSystem.Data\CarRentSystem.Data.csproj", "{15CFAB14-3B61-4005-AFF2-6600991AB5C9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DC79AF9A-A8C7-439B-B7FC-98823F0CC7A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC79AF9A-A8C7-439B-B7FC-98823F0CC7A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC79AF9A-A8C7-439B-B7FC-98823F0CC7A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC79AF9A-A8C7-439B-B7FC-98823F0CC7A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15CFAB14-3B61-4005-AFF2-6600991AB5C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15CFAB14-3B61-4005-AFF2-6600991AB5C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15CFAB14-3B61-4005-AFF2-6600991AB5C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15CFAB14-3B61-4005-AFF2-6600991AB5C9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
