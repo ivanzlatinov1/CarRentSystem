@@ -2,6 +2,7 @@
 {
     using CarRentSystem.Data.Entities;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Metadata.Builders;
     using static Constants;
     public class ApplicationDbContext : DbContext
     {
@@ -54,10 +55,15 @@
                     .IsUnique();
             });
 
-            modelBuilder.Entity<User>()
-                .Property(u => u.EGN)
-                .HasColumnType("char")
-                .HasMaxLength(10);
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity
+                    .Property(u => u.EGN)
+                    .HasColumnType("char")
+                    .HasMaxLength(10);
+
+                MakePropertiesUnique(entity, "EGN", "Username", "Email");
+            });
 
             modelBuilder.Entity<Car>()
                 .Property(c => c.Price)
@@ -65,6 +71,17 @@
                 .HasPrecision(18, 2);
 
             base.OnModelCreating(modelBuilder);
+        }
+
+        private static void MakePropertiesUnique<T>(EntityTypeBuilder<T> entity, params string[] properties)
+            where T : BaseEntity
+        {
+            foreach (var property in properties)
+            {
+                entity
+                    .HasIndex(property)
+                    .IsUnique(true);
+            }
         }
     }
 }
