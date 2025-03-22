@@ -15,6 +15,6 @@
 
         public decimal? Price { get; set; }
 
-        public ICollection<RentModel> Rents { get; set; } = new HashSet<RentModel>();
+        public ICollection<RentModel> Rents { get; set; } = [];
     }
 }

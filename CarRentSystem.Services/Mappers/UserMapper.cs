@@ -9,28 +9,26 @@ namespace CarRentSystem.Services.Mappers
             => new()
             {
                 Id = entity.Id,
-                Username = entity.Username,
-                Password = entity.Password,
+                Username = entity.UserName,
+                Password = entity.PasswordHash,
                 FirstName = entity.FirstName,
                 LastName = entity.LastName,
                 EGN = entity.EGN,
                 PhoneNumber = entity.PhoneNumber,
                 Email = entity.Email,
-                Rents = firstTime ? entity.Rents.Select(x => x.ToModel()).ToHashSet() : null!
             };
 
         public static User ToEntity(this UserModel model, bool firstTime = true)
             => new()
             {
                 Id = model.Id,
-                Username = model.Username,
-                Password = model.Password,
+                UserName = model.Username,
+                PasswordHash = model.Password,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 EGN = model.EGN,
                 PhoneNumber = model.PhoneNumber,
-                Email = model.Email,
-                Rents = firstTime ? model.Rents.Select(x => x.ToEntity()).ToHashSet() : null!
+                Email = model.Email
             };
     }
 }
