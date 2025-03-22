@@ -2,7 +2,6 @@
 {
     using CarRentSystem.Data.Entities;
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore.Metadata.Builders;
     using static Constants;
     public class ApplicationDbContext : DbContext
     {
@@ -25,9 +24,9 @@
             base.OnConfiguring(optionsBuilder);
         }
 
-        public required DbSet<User> Users { get; set; } = default!;
         public required DbSet<Car> Cars { get; set; } = default!;
         public required DbSet<Rent> Rents { get; set; } = default!;
+        public required DbSet<User> Users { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -35,12 +34,6 @@
             {
                 entity
                     .HasKey(r => new { r.CarId, r.UserId });
-
-                entity
-                    .HasOne(r => r.User)
-                    .WithMany(u => u.Rents)
-                    .HasForeignKey(r => r.UserId)
-                    .OnDelete(DeleteBehavior.Restrict);
 
                 entity
                     .HasOne(r => r.Car)
@@ -55,33 +48,12 @@
                     .IsUnique();
             });
 
-            modelBuilder.Entity<User>(entity =>
-            {
-                entity
-                    .Property(u => u.EGN)
-                    .HasColumnType("char")
-                    .HasMaxLength(10);
-
-                MakePropertiesUnique(entity, "EGN", "Username", "Email");
-            });
-
             modelBuilder.Entity<Car>()
                 .Property(c => c.Price)
                 .HasColumnType("decimal")
                 .HasPrecision(18, 2);
 
             base.OnModelCreating(modelBuilder);
-        }
-
-        private static void MakePropertiesUnique<T>(EntityTypeBuilder<T> entity, params string[] properties)
-            where T : BaseEntity
-        {
-            foreach (var property in properties)
-            {
-                entity
-                    .HasIndex(property)
-                    .IsUnique(true);
-            }
         }
     }
 }

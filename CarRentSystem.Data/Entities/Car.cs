@@ -26,6 +26,6 @@ namespace CarRentSystem.Data.Entities
         [Comment("The price of the car for a day")]
         public decimal? Price { get; set; }
 
-        public virtual ICollection<Rent> Rents { get; set; } = new HashSet<Rent>();
+        public virtual ICollection<Rent> Rents { get; set; } = [];
     }
 }
