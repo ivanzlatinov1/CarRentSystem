@@ -1,6 +1,6 @@
 ﻿namespace CarRentSystem.Data
 {
-    public static class Constants
+    internal static class Constants
     {
         // Context's constants
         public const string DefaultConnection

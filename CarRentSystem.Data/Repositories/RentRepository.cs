@@ -11,11 +11,11 @@ namespace CarRentSystem.Data.Repositories
         public async Task<ICollection<Rent>> GetAllAsync()
             => await _set.ToArrayAsync();
 
-        public Rent? GetByIdAsync(string userId, int carId)
-            => _set
+        public async Task<Rent?> GetByIdAsync(string userId, int carId)
+            => await _set
                 .Include(r => r.User)
                 .Include(r => r.Car)
-                .First(r => r.UserId == userId && r.CarId == carId);
+                .FirstAsync(r => r.UserId == userId && r.CarId == carId);
 
         public async Task<string> RentCarAsync(string userId, int carId)
         {
@@ -41,7 +41,7 @@ namespace CarRentSystem.Data.Repositories
 
         public async Task<string> ReturnCarAsync(string userId, int carId)
         {
-            Rent? rent = this.GetByIdAsync(userId, carId);
+            Rent? rent = await this.GetByIdAsync(userId, carId);
 
             if (rent == null || rent.ReturnDate != null)
                 return "Invalid rent or car already returned.";
