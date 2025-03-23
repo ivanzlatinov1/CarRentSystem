@@ -45,6 +45,14 @@ namespace CarRentSystem.Services.Implementations
             return car.ToModel();
         }
 
+        public async Task UpdateAsync(int id)
+        {
+            Car? car = await _carRepository.GetByIdAsync(id);
+
+            if(car != null)
+                await _carRepository.UpdateAsync(car);
+        }
+
         public async Task RemoveAsync(int id)
         {
             Car? car = await _carRepository.GetByIdAsync(id);

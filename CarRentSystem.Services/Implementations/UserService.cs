@@ -1,50 +1,54 @@
-﻿using CarRentSystem.Data.Entities;
-using CarRentSystem.Data.Repositories.Contracts;
+﻿using Microsoft.AspNetCore.Identity;
 using CarRentSystem.Services.Contracts;
 using CarRentSystem.Services.Mappers;
 using CarRentSystem.Services.Models;
+using CarRentSystem.Data.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace CarRentSystem.Services.Implementations
 {
-    public class UserService(IUserRepository userRepository) : IUserService
+    public class UserService(UserManager<User> userManager) : IUserService
     {
-        private readonly IUserRepository _userRepository = userRepository;
+        private readonly UserManager<User> _userManager = userManager;
+
         public async Task<ICollection<UserModel>> GetAllAsync()
         {
-            var users = await _userRepository.GetAllAsync();
-
-            return [.. users.Select(x => x.ToModel())];
+            var users = await _userManager.Users.ToListAsync();
+            return users.Select(x => x.ToModel()).ToList();
         }
 
         public async Task<string> AddAsync(UserModel userModel)
         {
-            var entity = await _userRepository.CreateAsync(userModel.ToEntity());
-            return entity.Id;
+            var user = userModel.ToEntity();
+            var result = await _userManager.CreateAsync(user, userModel.Password);
+
+            if (!result.Succeeded)
+            {
+                throw new Exception(string.Join(", ", result.Errors.Select(e => e.Description)));
+            }
+
+            return user.Id;
         }
 
         public async Task<ICollection<UserModel>?> FindByUsername(string userName)
         {
-            var users = await _userRepository.GetByUsernameAsync(userName);
-
-            return users.Select(x => x.ToModel()).ToList();
+            var user = await _userManager.FindByNameAsync(userName);
+            return user != null ? new List<UserModel> { user.ToModel() } : new List<UserModel>();
         }
-
 
         public async Task<UserModel?> GetByIdAsync(string id)
         {
-            User? user = await _userRepository.GetByIdAsync(id);
-
-            if(user == null) return null;
-
-            return user.ToModel();
+            var user = await _userManager.FindByIdAsync(id);
+            return user?.ToModel();
         }
 
         public async Task RemoveAsync(string id)
         {
-            User? user = await _userRepository.GetByIdAsync(id);
-
-            if(user != null)
-                await _userRepository.DeleteAsync(user);
+            var user = await _userManager.FindByIdAsync(id);
+            if (user != null)
+            {
+                await _userManager.DeleteAsync(user);
+            }
         }
     }
 }
