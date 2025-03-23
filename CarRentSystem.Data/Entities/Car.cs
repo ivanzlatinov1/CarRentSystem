@@ -17,10 +17,13 @@ namespace CarRentSystem.Data.Entities
         [MaxLength(MaxCarNameLength)]
         public string Model { get; set; } = null!;
 
+        // The year the car was manufactured
         public int? Year { get; set; }
 
+        // The number of seats in the car
         public int? Seats { get; set; }
 
+        // Optional description of the car
         [MaxLength(MaxDescriptionLength)]
         public string? Description { get; set; }
 

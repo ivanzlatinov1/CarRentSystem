@@ -26,7 +26,8 @@ namespace CarRentSystem.Data.Seeders
                 FirstName = "Admin",
                 LastName = "User",
                 EGN = "0000000000",
-                PhoneNumber = "1234567890"
+                PhoneNumber = "1234567890",
+                ImageUrl = @"https://t3.ftcdn.net/jpg/05/87/76/66/360_F_587766653_PkBNyGx7mQh9l1XXPtCAq1lBgOsLl6xH.jpg"
             };
 
             string adminPassword = "Admin#123";
@@ -41,7 +42,8 @@ namespace CarRentSystem.Data.Seeders
                 FirstName = "Test",
                 LastName = "User",
                 EGN = "0000000000",
-                PhoneNumber = "1234567890"
+                PhoneNumber = "1234567890",
+                ImageUrl = @"https://t3.ftcdn.net/jpg/05/87/76/66/360_F_587766653_PkBNyGx7mQh9l1XXPtCAq1lBgOsLl6xH.jpg"
             };
             string regularPassword = "User#123";
             await SeedUser(regularUser, regularPassword, "User", userManager);

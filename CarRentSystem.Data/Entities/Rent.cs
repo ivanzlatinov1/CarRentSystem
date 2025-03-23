@@ -16,9 +16,11 @@ namespace CarRentSystem.Data.Entities
         public string UserId { get; set; } = null!;
         public virtual User User { get; set; } = null!;
 
+        // The date when the car was rented
         [Required]
         public DateTime RentDate { get; set; }
 
+        // The date when the car should be returned (or has already been returned)
         public DateTime? ReturnDate { get; set; }
     }
 }

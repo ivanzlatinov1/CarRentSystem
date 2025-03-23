@@ -1,9 +1,10 @@
 ﻿namespace CarRentSystem.Data
 {
     using CarRentSystem.Data.Entities;
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
     using static Constants;
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext()
         {
@@ -26,7 +27,6 @@
 
         public required DbSet<Car> Cars { get; set; } = default!;
         public required DbSet<Rent> Rents { get; set; } = default!;
-        public required DbSet<User> Users { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
