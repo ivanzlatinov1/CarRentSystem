@@ -57,7 +57,7 @@ namespace CarRentSystem.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cars");
+                    b.ToTable("Cars", (string)null);
                 });
 
             modelBuilder.Entity("CarRentSystem.Data.Entities.Rent", b =>
@@ -82,7 +82,7 @@ namespace CarRentSystem.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Rents");
+                    b.ToTable("Rents", (string)null);
                 });
 
             modelBuilder.Entity("CarRentSystem.Data.Entities.User", b =>
@@ -145,7 +145,7 @@ namespace CarRentSystem.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("CarRentSystem.Data.Entities.Rent", b =>
@@ -157,7 +157,7 @@ namespace CarRentSystem.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("CarRentSystem.Data.Entities.User", "User")
-                        .WithMany()
+                        .WithMany("Rents")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -168,6 +168,11 @@ namespace CarRentSystem.Data.Migrations
                 });
 
             modelBuilder.Entity("CarRentSystem.Data.Entities.Car", b =>
+                {
+                    b.Navigation("Rents");
+                });
+
+            modelBuilder.Entity("CarRentSystem.Data.Entities.User", b =>
                 {
                     b.Navigation("Rents");
                 });

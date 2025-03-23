@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarRentSystem.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250322162510_InitialMigration")]
+    [Migration("20250323055941_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -160,7 +160,7 @@ namespace CarRentSystem.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("CarRentSystem.Data.Entities.User", "User")
-                        .WithMany()
+                        .WithMany("Rents")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -171,6 +171,11 @@ namespace CarRentSystem.Data.Migrations
                 });
 
             modelBuilder.Entity("CarRentSystem.Data.Entities.Car", b =>
+                {
+                    b.Navigation("Rents");
+                });
+
+            modelBuilder.Entity("CarRentSystem.Data.Entities.User", b =>
                 {
                     b.Navigation("Rents");
                 });

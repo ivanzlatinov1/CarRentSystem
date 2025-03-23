@@ -15,5 +15,7 @@ namespace CarRentSystem.Data.Entities
 
         [Column(TypeName = "char(10)")]
         public string? EGN {get; set; }
+
+        public ICollection<Rent> Rents { get; set; } = [];
     }
 }
