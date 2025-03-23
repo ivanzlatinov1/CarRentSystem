@@ -15,6 +15,8 @@ namespace CarRentSystem.Services.Mappers
                 Seats = entity.Seats,
                 Description = entity.Description,
                 Price = entity.Price,
+                ImageUrl = entity.ImageUrl,
+                Image = entity.Image,
                 Rents = firstTime ? entity.Rents.Select(x => x.ToModel(false)).ToHashSet() : null!
             };
 
@@ -28,6 +30,8 @@ namespace CarRentSystem.Services.Mappers
                 Seats = model.Seats,
                 Description = model.Description,
                 Price = model.Price,
+                ImageUrl = model.ImageUrl,
+                Image = model.Image,
                 Rents = firstTime ? model.Rents.Select(x => x.ToEntity(false)).ToHashSet() : null!
             };
     }

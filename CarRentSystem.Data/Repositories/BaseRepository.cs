@@ -8,10 +8,11 @@ namespace CarRentSystem.Data.Repositories
     public class BaseRepository<T>(ApplicationDbContext context) : IBaseRepository<T> where T : BaseEntity
     {
         private readonly DbSet<T> _set = context.Set<T>();
-        public async Task CreateAsync(T entity)
+        public async Task<T> CreateAsync(T entity)
         {
             await _set.AddAsync(entity);
             await context.SaveChangesAsync();
+            return entity;
         }
 
         public async Task<ICollection<T>> GetAllAsync()

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using static CarRentSystem.Data.Constants;
@@ -25,6 +26,11 @@ namespace CarRentSystem.Data.Entities
 
         [Comment("The price of the car for a day")]
         public decimal? Price { get; set; }
+
+        public string? ImageUrl { get; set; }
+
+        [NotMapped]
+        public IFormFile? Image { get; set; }
 
         public virtual ICollection<Rent> Rents { get; set; } = [];
     }

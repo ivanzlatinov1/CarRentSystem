@@ -16,6 +16,8 @@ namespace CarRentSystem.Services.Mappers
                 EGN = entity.EGN,
                 PhoneNumber = entity.PhoneNumber,
                 Email = entity.Email,
+                ImageUrl = entity.ImageUrl,
+                Image = entity.Image,
                 Rents = firstTime ? entity.Rents.Select(r => r.ToModel()).ToList() : null
             };
 
@@ -30,6 +32,8 @@ namespace CarRentSystem.Services.Mappers
                 EGN = model.EGN,
                 PhoneNumber = model.PhoneNumber,
                 Email = model.Email,
+                ImageUrl = model.ImageUrl,
+                Image = model.Image,
                 Rents = firstTime ? model.Rents.Select(r => r.ToEntity()).ToList() : null!
             };
     }

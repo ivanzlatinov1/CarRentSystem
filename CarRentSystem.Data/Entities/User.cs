@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using static CarRentSystem.Data.Constants;
@@ -15,6 +16,11 @@ namespace CarRentSystem.Data.Entities
 
         [Column(TypeName = "char(10)")]
         public string? EGN {get; set; }
+
+        public string? ImageUrl { get; set; }
+
+        [NotMapped]
+        public IFormFile? Image { get; set; }
 
         public ICollection<Rent> Rents { get; set; } = [];
     }

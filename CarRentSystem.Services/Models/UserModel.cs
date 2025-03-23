@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CarRentSystem.Services.Models
 {
@@ -27,6 +29,10 @@ namespace CarRentSystem.Services.Models
 
         [EmailAddress]
         public string? Email { get; set; }
+
+        public string? ImageUrl { get; set; }
+
+        public IFormFile? Image { get; set; }
 
         public ICollection<RentModel>? Rents { get; set; } = [];
     }

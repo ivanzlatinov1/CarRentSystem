@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CarRentSystem.Services.Models
 {
@@ -25,6 +27,11 @@ namespace CarRentSystem.Services.Models
 
         [Range(0, double.MaxValue, ErrorMessage = "Price must be a positive value.")]
         public decimal? Price { get; set; }
+
+        public string? ImageUrl { get; set; }
+
+        [NotMapped]
+        public IFormFile? Image { get; set; }
 
         public ICollection<RentModel> Rents { get; set; } = [];
     }
