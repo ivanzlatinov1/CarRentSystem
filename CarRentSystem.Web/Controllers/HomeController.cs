@@ -5,10 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CarRentSystem.Web.Controllers
 {
-    public class HomeController(ILogger<HomeController> logger, ICarService carService, IUserService userService,
+    public class HomeController(ICarService carService, IUserService userService,
         IRentService rentService) : Controller
     {
-        private readonly ILogger<HomeController> _logger = logger;
         private readonly ICarService _carService = carService;
         private readonly IUserService _userService = userService;
         private readonly IRentService _rentService = rentService;

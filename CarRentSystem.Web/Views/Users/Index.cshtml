@@ -1,0 +1,35 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<CarRentSystem.Data.Entities.User> UserManager
+@model IEnumerable<CarRentSystem.Services.Models.UserModel>
+@{
+    bool isAdmin = User.IsInRole("Admin");
+}
+<h2>Users</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            var isCurrentUser = (await UserManager.GetUserAsync(User))?.Id == user.Id;
+            <tr>
+                <td>
+                    @user.Username @(isCurrentUser ? "(You)" : "")
+                </td>
+                <td>@user.Email</td>
+                @if (isAdmin)
+                {
+                    <td>
+                        <a asp-action="Details" asp-route-id="@user.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@user.Id">Delete</a>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

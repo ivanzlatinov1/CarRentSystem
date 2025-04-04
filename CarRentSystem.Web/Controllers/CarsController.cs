@@ -1,21 +1,24 @@
 ﻿using CarRentSystem.Services.Contracts;
 using CarRentSystem.Services.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace CarRentSystem.Web.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CarsController(ICarService service) : Controller
     {
         private readonly ICarService _service = service;
 
         // GET: Cars
+        [AllowAnonymous]
         public async Task<IActionResult> Index(string search)
         {
             ICollection<CarModel>? cars;
 
-            if(!string.IsNullOrEmpty(search))
+            if (!string.IsNullOrEmpty(search))
                 cars = await _service.FindByMake(search);
             else
                 cars = await _service.GetAllAsync();
@@ -24,7 +27,6 @@ namespace CarRentSystem.Web.Controllers
         }
 
         // GET: Cars/Details/5
-        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -43,7 +45,6 @@ namespace CarRentSystem.Web.Controllers
         }
 
         // GET: Cars/Create
-        [Authorize("Admin")]
         public IActionResult Create()
         {
             return View();
@@ -51,7 +52,6 @@ namespace CarRentSystem.Web.Controllers
 
         // POST: Cars/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
-        [Authorize("Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Make,Model,Year,Seats,Description,Price,ImageUrl,Id")] CarModel car)
@@ -65,7 +65,6 @@ namespace CarRentSystem.Web.Controllers
         }
 
         // GET: Cars/Edit/5
-        [Authorize("Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -84,7 +83,6 @@ namespace CarRentSystem.Web.Controllers
 
         // POST: Cars/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
-        [Authorize("Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Make,Model,Year,Seats,Description,Price,ImageUrl,Id")] CarModel car)
@@ -117,7 +115,6 @@ namespace CarRentSystem.Web.Controllers
         }
 
         // GET: Cars/Delete/5
-        [Authorize("Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -136,7 +133,6 @@ namespace CarRentSystem.Web.Controllers
         }
 
         // POST: Cars/Delete/5
-        [Authorize("Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
