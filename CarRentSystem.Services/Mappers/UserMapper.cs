@@ -10,7 +10,6 @@ namespace CarRentSystem.Services.Mappers
             {
                 Id = entity.Id,
                 Username = entity.UserName,
-                Password = entity.PasswordHash!,
                 FirstName = entity.FirstName,
                 LastName = entity.LastName,
                 EGN = entity.EGN,
@@ -18,7 +17,7 @@ namespace CarRentSystem.Services.Mappers
                 Email = entity.Email,
                 ImageUrl = entity.ImageUrl,
                 Image = entity.Image,
-                Rents = firstTime ? entity.Rents.Select(r => r.ToModel()).ToList() : null
+                Rents = firstTime ? entity.Rents.Select(r => r.ToModel()).ToList() : null!
             };
 
         public static User ToEntity(this UserModel model, bool firstTime = true)
@@ -26,7 +25,6 @@ namespace CarRentSystem.Services.Mappers
             {
                 Id = model.Id,
                 UserName = model.Username,
-                PasswordHash = model.Password,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 EGN = model.EGN,

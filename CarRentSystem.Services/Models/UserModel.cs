@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CarRentSystem.Services.Models
 {
@@ -10,10 +9,6 @@ namespace CarRentSystem.Services.Models
 
         [MaxLength(255)]
         public string? Username { get; set; }
-
-        [Required]
-        [MinLength(3, ErrorMessage = "Password must be at least 3 characters long.")]
-        public string Password { get; set; } = null!;
 
         [RegularExpression(@"^[A-Z][a-zA-Z-]+$", ErrorMessage = "First name must start with an uppercase letter and contain only letters and hyphens.")]
         public string? FirstName { get; set; }
@@ -34,6 +29,6 @@ namespace CarRentSystem.Services.Models
 
         public IFormFile? Image { get; set; }
 
-        public ICollection<RentModel>? Rents { get; set; } = [];
+        public ICollection<RentModel> Rents { get; set; } = [];
     }
 }

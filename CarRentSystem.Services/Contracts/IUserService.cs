@@ -6,7 +6,7 @@ namespace CarRentSystem.Services.Contracts
     {
         Task<ICollection<UserModel>> GetAllAsync();
         Task<UserModel?> GetByIdAsync(string id);
-        Task<string> AddAsync(UserModel userModel);
+        Task<string> AddAsync(UserModel userModel, string password);
         Task RemoveAsync(string id);
         Task<ICollection<UserModel>?> FindByUsername(string userName);
     }

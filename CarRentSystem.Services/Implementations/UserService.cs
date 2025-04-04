@@ -17,10 +17,10 @@ namespace CarRentSystem.Services.Implementations
             return users.Select(x => x.ToModel()).ToList();
         }
 
-        public async Task<string> AddAsync(UserModel userModel)
+        public async Task<string> AddAsync(UserModel userModel, string password)
         {
             var user = userModel.ToEntity();
-            var result = await _userManager.CreateAsync(user, userModel.Password);
+            var result = await _userManager.CreateAsync(user, password);
 
             if (!result.Succeeded)
             {
