@@ -8,70 +8,38 @@ namespace CarRentSystem.Data.Seeders
     {
         public static async Task Initialize(IServiceProvider serviceProvider)
         {
-            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var userManager = serviceProvider.GetRequiredService<UserManager<User>>();
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-            await SeedRoles(roleManager);
-            await SeedUsers(userManager);
+            await SeedAdmin(userManager, roleManager);
         }
 
-        private static async Task SeedUsers(UserManager<User> userManager)
+        public static async Task SeedAdmin(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
-            // Seeding the admin
-            var adminUser = new User
-            {
-                UserName = "admin_user",
-                Email = "admin@admin.com",
-                EmailConfirmed = true,
-                FirstName = "Admin",
-                LastName = "User",
-                EGN = "0000000000",
-                PhoneNumber = "1234567890",
-                ImageUrl = @"https://t3.ftcdn.net/jpg/05/87/76/66/360_F_587766653_PkBNyGx7mQh9l1XXPtCAq1lBgOsLl6xH.jpg"
-            };
+            string adminEmail = "admin@gmail.com";
+            string adminPassword = "Admin@123";
 
-            string adminPassword = "Admin#123";
-            await SeedUser(adminUser, adminPassword, "Admin", userManager);
-
-            // Seeding a regular user
-            var regularUser = new User()
+            if (!await roleManager.RoleExistsAsync("Admin"))
             {
-                UserName = "user_default",
-                Email = "user@user.user.com",
-                EmailConfirmed = true,
-                FirstName = "Test",
-                LastName = "User",
-                EGN = "0000000000",
-                PhoneNumber = "1234567890",
-                ImageUrl = @"https://t3.ftcdn.net/jpg/05/87/76/66/360_F_587766653_PkBNyGx7mQh9l1XXPtCAq1lBgOsLl6xH.jpg"
-            };
-            string regularPassword = "User#123";
-            await SeedUser(regularUser, regularPassword, "User", userManager);
-        }
-
-        private static async Task SeedUser(User user, string password, string roleName,
-            UserManager<User> userManager)
-        {
-            User? userInfo = await userManager.FindByEmailAsync(user.Email);
-            if (userInfo == null)
-            {
-                var created = await userManager.CreateAsync(user, password);
-                if (created.Succeeded)
-                {
-                    await userManager.AddToRoleAsync(user, roleName);
-                }
+                await roleManager.CreateAsync(new IdentityRole("Admin"));
             }
-        }
-        private static async Task SeedRoles(RoleManager<IdentityRole> roleManager)
-        {
-            string[] roleNames = ["Admin", "User"];
-            foreach (var role in roleNames)
+
+            if (!await roleManager.RoleExistsAsync("User"))
             {
-                bool roleExist = await roleManager.RoleExistsAsync(role);
-                if (!roleExist)
+                await roleManager.CreateAsync(new IdentityRole("User"));
+            }
+
+            var adminUser = await userManager.FindByEmailAsync(adminEmail);
+            if (adminUser == null)
+            {
+                adminUser = new User
                 {
-                    await roleManager.CreateAsync(new IdentityRole(role));
-                }
+                    UserName = adminEmail,
+                    Email = adminEmail,
+                    EmailConfirmed = true
+                };
+                await userManager.CreateAsync(adminUser, adminPassword);
+                await userManager.AddToRoleAsync(adminUser, "Admin");
             }
         }
     }

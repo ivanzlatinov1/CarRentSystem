@@ -1,6 +1,7 @@
 ﻿namespace CarRentSystem.Data
 {
     using CarRentSystem.Data.Entities;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
     using static Constants;
@@ -53,7 +54,16 @@
                 .HasColumnType("decimal")
                 .HasPrecision(18, 2);
 
+            SeedRoles(modelBuilder);
             base.OnModelCreating(modelBuilder);
+        }
+
+        private static void SeedRoles(ModelBuilder builder)
+        {
+            builder.Entity<IdentityRole>().HasData(
+                new IdentityRole { Id = "1", Name = "Admin", NormalizedName = "ADMIN" },
+                new IdentityRole { Id = "2", Name = "User", NormalizedName = "USER" }
+            );
         }
     }
 }
