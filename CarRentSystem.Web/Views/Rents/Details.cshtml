@@ -1,15 +1,39 @@
 ﻿@model CarRentSystem.Services.Models.RentModel
+@inject CarRentSystem.Services.Contracts.ICarService carService
+@inject CarRentSystem.Services.Contracts.IUserService userService
+
 @{
     ViewData["Title"] = "Rent Details";
+    var car = carService.GetByIdAsync(Model.CarId);
+    var user = userService.GetByIdAsync(Model.UserId);
 }
 
-<h2>Rent Details</h2>
+<h2 class="text-center" style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #ffd700; margin-bottom: 20px;">Rent Details</h2>
 
-<div>
-    <p><strong>User ID:</strong> @Model.UserId</p>
-    <p><strong>Car ID:</strong> @Model.CarId</p>
-    <p><strong>Start Date:</strong> @Model.RentDate</p>
-    <p><strong>End Date:</strong> @Model.ReturnDate</p>
+<div class="d-flex justify-content-center align-items-center"
+     style="background: linear-gradient(to right, #0d1b2a, #4a3f35); border-radius: 10px; padding: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); color: #fff; width: 50%; margin: 0 auto;">
+    <div style="width: 100%;">
+        <p style="font-family: 'Roboto', sans-serif; font-size: 1.2rem; color: #ffd700;">
+            <strong>User:</strong> @user?.Result.Username
+        </p>
+        <p style="font-family: 'Roboto', sans-serif; font-size: 1.2rem; color: #ffd700;">
+            <strong>Car:</strong> @car?.Result.Make @car?.Result.Model
+        </p>
+        <p style="font-family: 'Roboto', sans-serif; font-size: 1.2rem; color: #fff;">
+            <strong>Start Date:</strong> @Model.RentDate.ToString("MM/dd/yyyy")
+        </p>
+        <p style="font-family: 'Roboto', sans-serif; font-size: 1.2rem; color: #fff;">
+            <strong>End Date:</strong> @Model.RentDate.AddDays(7).ToString("MM/dd/yyyy")
+        </p>
+
+        <div class="text-center">
+            <a asp-controller="Cars" asp-action="Details" asp-route-id="@car?.Result.Id" class="btn btn-lg"
+               style="background: #ffd700; color: #0d1b2a; border: none; font-family: 'Roboto', sans-serif; margin-top: 20px;">Car Details</a>
+        </div>
+    </div>
 </div>
 
-<a asp-action="Index">Back to List</a>
+<div class="text-center mt-4">
+    <a asp-action="Index" class="btn btn-lg"
+       style="background: #ffd700; color: #0d1b2a; border: none; font-family: 'Roboto', sans-serif;">Back to List</a>
+</div>

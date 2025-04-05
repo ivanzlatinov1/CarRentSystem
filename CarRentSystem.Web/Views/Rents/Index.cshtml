@@ -1,37 +1,48 @@
 ﻿@model IEnumerable<CarRentSystem.Services.Models.RentModel>
+@inject CarRentSystem.Services.Contracts.ICarService carService;
+@inject CarRentSystem.Services.Contracts.IUserService userService;
 @{
     ViewData["Title"] = "Rents";
 }
 
-<h2>Rents</h2>
+<h2 class="text-center" style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #ffd700; margin-bottom: 10px; margin-top: 10px">Rents</h2>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>User ID</th>
-            <th>Car ID</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var rent in Model)
-        {
+<div class="container" style="background: linear-gradient(to right, #0d1b2a, #4a3f35); border-radius: 10px; padding: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); color: #fff; margin-bottom: 20px;">
+    <table class="table text-center table-striped" style="color: #fff; border-radius: 10px; overflow: hidden;">
+        <thead style="background: #0d1b2a; color: #ffd700;">
             <tr>
-                <td>@rent.UserId</td>
-                <td>@rent.CarId</td>
-                <td>@rent.RentDate</td>
-                <td>@rent.ReturnDate</td>
-                <td>
-                    <a asp-action="Details" asp-route-userId="@rent.UserId" asp-route-carId="@rent.CarId">Details</a> |
-                    <a asp-action="Edit" asp-route-userId="@rent.UserId" asp-route-carId="@rent.CarId">Edit</a> |
-                    <a asp-action="Delete" asp-route-userId="@rent.UserId" asp-route-carId="@rent.CarId">Delete</a>
-                </td>
+                <th>User</th>
+                <th>Car</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Actions</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var rent in Model)
+            {
+                <tr class="text-white">
+                    <td style="font-family: 'Roboto', sans-serif;">@userService.GetByIdAsync(rent.UserId).Result.Username</td>
+                    <td style="font-family: 'Roboto', sans-serif;">@carService.GetByIdAsync(rent.CarId).Result.Make @carService.GetByIdAsync(rent.CarId).Result.Model</td>
+                    <td style="font-family: 'Roboto', sans-serif;">@rent.RentDate.ToString("MM/dd/yyyy")</td>
+                    <td style="font-family: 'Roboto', sans-serif;">@rent.RentDate.AddDays(7).ToString("MM/dd/yyyy")</td>
+                    <td>
+                        <div class="d-flex justify-content-center">
+                            <a asp-action="Details" asp-route-userId="@rent.UserId" asp-route-carId="@rent.CarId" class="btn btn-sm"
+                               style="background: #ffd700; color: #0d1b2a; border: none; margin-right: 5px;">Details</a>
+                            <a asp-action="Edit" asp-route-userId="@rent.UserId" asp-route-carId="@rent.CarId" class="btn btn-sm"
+                               style="background: #ffd700; color: #0d1b2a; border: none; margin-right: 5px;">Edit</a>
+                            <a asp-action="Delete" asp-route-userId="@rent.UserId" asp-route-carId="@rent.CarId" class="btn btn-sm"
+                               style="background: #ff4500; color: #fff; border: none;">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
-<a asp-action="Rent">Rent a Car</a> |
-<a asp-action="Return">Return a Car</a>
+<div class="text-center">
+    <a asp-action="Rent" class="btn btn-lg" style="background: #ffd700; color: #0d1b2a; border: none; font-family: 'Roboto', sans-serif; margin-right: 10px;">Rent a Car</a>
+    <a asp-action="Return" class="btn btn-lg" style="background: #ffd700; color: #0d1b2a; border: none; font-family: 'Roboto', sans-serif;">Return a Car</a>
+</div>

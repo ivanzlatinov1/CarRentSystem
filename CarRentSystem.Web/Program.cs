@@ -43,7 +43,9 @@ builder.Services.AddScoped<ICarRepository, CarRepository>();
 builder.Services.AddScoped<IRentRepository, RentRepository>();
 
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<CarRentSystem.Services.Implementations.UserService>();
 builder.Services.AddScoped<ICarService, CarService>();
+builder.Services.AddScoped<CarRentSystem.Services.Implementations.CarService>();
 builder.Services.AddScoped<IRentService, RentService>();
 
 builder.Services.AddAuthorizationBuilder()

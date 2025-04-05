@@ -17,7 +17,8 @@ namespace CarRentSystem.Web.Controllers
         public async Task<IActionResult> Index()
         {
             var rents = await _rentService.GetAllAsync();
-            return View(rents); // Views/Rents/Index.cshtml
+
+            return View(rents);
         }
 
         // GET: /Rents/Details?userId=abc&carId=1
@@ -30,13 +31,13 @@ namespace CarRentSystem.Web.Controllers
                 return NotFound();
             }
 
-            return View(rent); // Views/Rents/Details.cshtml
+            return View(rent);
         }
 
         // GET: /Rents/Edit
         public IActionResult Edit(string userId, int carId)
         {
-            return View(); // Load the Edit form (optionally pre-fill)
+            return View();
         }
 
         // POST: /Rents/Edit

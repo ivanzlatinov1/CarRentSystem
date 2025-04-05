@@ -3,26 +3,39 @@
     ViewData["Title"] = "Edit Rent";
 }
 
-<h2>Edit Rent</h2>
+<h2 class="text-center" style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #ffd700; margin-bottom: 20px;">Edit Rent</h2>
 
-<form asp-action="Edit">
-    <div class="form-group">
-        <label asp-for="UserId"></label>
-        <input asp-for="UserId" class="form-control" readonly />
-    </div>
-    <div class="form-group">
-        <label asp-for="CarId"></label>
-        <input asp-for="CarId" class="form-control" readonly />
-    </div>
-    <div class="form-group">
-        <label asp-for="RentDate"></label>
-        <input asp-for="RentDate" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for="ReturnDate"></label>
-        <input asp-for="ReturnDate" class="form-control" />
-    </div>
-    <button type="submit" class="btn btn-primary">Save</button>
-</form>
+<div class="d-flex justify-content-center align-items-center"
+     style="background: linear-gradient(to right, #0d1b2a, #4a3f35); border-radius: 10px; padding: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); color: #fff; width: 50%; margin: 0 auto;">
+    <form asp-action="Edit" method="post" style="width: 100%;">
+        <div class="form-group mb-3">
+            <label asp-for="UserId" style="font-family: 'Roboto', sans-serif; color: #ffd700;">User ID</label>
+            <input asp-for="UserId" class="form-control" readonly
+                   style="background: rgba(0, 0, 0, 0.8); color: #fff; border: none; border-bottom: 2px solid #ffd700; padding-left: 10px;" />
+        </div>
+        <div class="form-group mb-3">
+            <label asp-for="CarId" style="font-family: 'Roboto', sans-serif; color: #ffd700;">Car ID</label>
+            <input asp-for="CarId" class="form-control" readonly
+                   style="background: rgba(0, 0, 0, 0.8); color: #fff; border: none; border-bottom: 2px solid #ffd700; padding-left: 10px;" />
+        </div>
+        <div class="form-group mb-3">
+            <label asp-for="RentDate" style="font-family: 'Roboto', sans-serif; color: #ffd700;">Rent Date</label>
+            <input asp-for="RentDate" class="form-control"
+                   style="background: rgba(255, 255, 255, 0.2); color: #fff; border: none; border-bottom: 2px solid #ffd700; padding-left: 10px;" />
+        </div>
+        <div class="form-group mb-3">
+            <label asp-for="ReturnDate" style="font-family: 'Roboto', sans-serif; color: #ffd700;">Return Date</label>
+            <input asp-for="ReturnDate" class="form-control"
+                   style="background: rgba(255, 255, 255, 0.2); color: #fff; border: none; border-bottom: 2px solid #ffd700; padding-left: 10px;" />
+        </div>
+        <button type="submit" class="btn btn-lg"
+                style="background: #ffd700; color: #0d1b2a; border: none; font-family: 'Roboto', sans-serif; width: 100%; margin-top: 20px;">
+            Save
+        </button>
+    </form>
+</div>
 
-<a asp-action="Index">Back to List</a>
+<div class="text-center mt-4">
+    <a asp-action="Index" class="btn btn-lg"
+       style="background: #ffd700; color: #0d1b2a; border: none; font-family: 'Roboto', sans-serif;">Back to List</a>
+</div>

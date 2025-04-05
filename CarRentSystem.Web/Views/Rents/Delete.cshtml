@@ -3,13 +3,23 @@
     ViewData["Title"] = "Delete Rent";
 }
 
-<h2>Delete Rent</h2>
+<h2 class="text-center" style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #ffd700; margin-bottom: 20px;">Delete Rent</h2>
 
-<p>Are you sure you want to delete this rent?</p>
+<p class="text-center" style="font-family: 'Roboto', sans-serif; color: #fff; font-size: 1.2rem; margin-bottom: 20px;">Are you sure you want to delete this rent?</p>
 
-<form asp-action="DeleteConfirmed" method="post">
-    <input type="hidden" asp-for="UserId" />
-    <input type="hidden" asp-for="CarId" />
-    <button type="submit" class="btn btn-danger">Delete</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
-</form>
+<div class="d-flex justify-content-center align-items-center"
+     style="background: linear-gradient(to right, #0d1b2a, #4a3f35); border-radius: 10px; padding: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); color: #fff; width: 50%; margin: 0 auto;">
+    <form asp-action="DeleteConfirmed" method="post" style="width: 100%;">
+        <input type="hidden" asp-for="UserId" />
+        <input type="hidden" asp-for="CarId" />
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-lg"
+                    style="background: #ff4500; color: #fff; border: none; font-family: 'Roboto', sans-serif; margin-right: 20px;">
+                Delete
+            </button>
+            <a asp-action="Index" class="btn btn-lg"
+               style="background: #ffd700; color: #0d1b2a; border: none; font-family: 'Roboto', sans-serif;">Cancel</a>
+        </div>
+    </form>
+</div>
