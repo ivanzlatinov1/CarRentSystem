@@ -1,6 +1,18 @@
 ﻿@model CarRentSystem.Services.Models.UserModel
 
-<h2>User Details</h2>
-<p><strong>Username:</strong> @Model.Username</p>
-<p><strong>Email:</strong> @Model.Email</p>
-<a asp-action="Index">Back to List</a>
+<h2 class="text-center" style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #ffd700; margin-bottom: 20px;">User Details</h2>
+
+<div class="container" style="background: linear-gradient(to right, #0d1b2a, #4a3f35); border-radius: 10px; padding: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); color: #fff; width: 75%; margin: 0 auto;">
+    <div style="margin-bottom: 20px;">
+        <p><strong>Username:</strong> @Model.Username</p>
+        <p><strong>Email:</strong> @Model.Email</p>
+        <p><strong>FirstName:</strong> @Model.FirstName</p>
+        <p><strong>LastName:</strong> @Model.LastName</p>
+        <p><strong>EGN:</strong> @Model.EGN</p>
+        <p><strong>PhoneNumber:</strong> @Model.PhoneNumber</p>
+    </div>
+
+    <div style="text-align: center;">
+        <a asp-action="Index" class="btn btn-sm" style="background: #ffd700; color: #0d1b2a; border: none; padding: 10px 20px;">Back to List</a>
+    </div>
+</div>

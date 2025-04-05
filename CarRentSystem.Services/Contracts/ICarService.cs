@@ -8,7 +8,7 @@ namespace CarRentSystem.Services.Contracts
         Task<CarModel?> GetByIdAsync(int id);
         Task<int> AddAsync(CarModel carModel);
         Task RemoveAsync(int id);
-        Task UpdateAsync(int id);
+        Task UpdateAsync(CarModel carModel);
         Task<ICollection<CarModel>?> FindByMake(string make);
         Task<ICollection<CarModel>?> FindByModel(string model);
     }

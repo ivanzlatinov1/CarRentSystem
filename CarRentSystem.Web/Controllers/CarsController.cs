@@ -21,7 +21,11 @@ namespace CarRentSystem.Web.Controllers
 
             if (!string.IsNullOrEmpty(search))
             {
-                cars = await _service.FindByMake(search) ?? await _service.FindByModel(search);
+                cars = await _service.FindByMake(search);
+                if(cars?.Count == 0)
+                {
+                    cars = await _service.FindByModel(search);
+                }
             }
             else
             {
@@ -108,7 +112,7 @@ namespace CarRentSystem.Web.Controllers
             {
                 try
                 {
-                    await _service.UpdateAsync(car.Id);
+                    await _service.UpdateAsync(car);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
