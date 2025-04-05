@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Rent a Car";
+    var users = ViewBag.Users as List<SelectListItem>;
+    var cars = ViewBag.Cars as List<SelectListItem>;
+}
+
+<h2>Rent a Car</h2>
+
+<form asp-action="Rent" method="post">
+    <div class="form-group">
+        <label for="userId">User</label>
+        <select id="userId" name="userId" class="form-control" asp-items="users"></select>
+    </div>
+    <div class="form-group">
+        <label for="carId">Car</label>
+        <select id="carId" name="carId" class="form-control" asp-items="cars"></select>
+    </div>
+    <button type="submit" class="btn btn-success">Rent</button>
+</form>
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        @foreach (var error in ViewData.ModelState[""].Errors)
+        {
+            <p>@error.ErrorMessage</p>
+        }
+    </div>
+}
+
+<a asp-action="Index">Back to List</a>

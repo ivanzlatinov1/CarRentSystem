@@ -1,0 +1,15 @@
+﻿@model CarRentSystem.Services.Models.RentModel
+@{
+    ViewData["Title"] = "Rent Details";
+}
+
+<h2>Rent Details</h2>
+
+<div>
+    <p><strong>User ID:</strong> @Model.UserId</p>
+    <p><strong>Car ID:</strong> @Model.CarId</p>
+    <p><strong>Start Date:</strong> @Model.RentDate</p>
+    <p><strong>End Date:</strong> @Model.ReturnDate</p>
+</div>
+
+<a asp-action="Index">Back to List</a>

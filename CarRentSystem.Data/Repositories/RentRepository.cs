@@ -44,7 +44,7 @@ namespace CarRentSystem.Data.Repositories
             Rent? rent = await this.GetByIdAsync(userId, carId);
 
             if (rent == null || rent.ReturnDate != null)
-                return "Invalid rent or car already returned.";
+                return "The car is not rented or it has already been returned.";
 
             rent.ReturnDate = DateTime.Now;
             await context.SaveChangesAsync();

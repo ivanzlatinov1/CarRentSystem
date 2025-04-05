@@ -1,7 +1,6 @@
 ﻿using CarRentSystem.Services.Contracts;
 using CarRentSystem.Services.Models;
 using CarRentSystem.Web.Utilities;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,9 +20,13 @@ namespace CarRentSystem.Web.Controllers
             ICollection<CarModel>? cars;
 
             if (!string.IsNullOrEmpty(search))
-                cars = await _service.FindByMake(search);
+            {
+                cars = await _service.FindByMake(search) ?? await _service.FindByModel(search);
+            }
             else
+            {
                 cars = await _service.GetAllAsync();
+            }
 
             return View(cars);
         }

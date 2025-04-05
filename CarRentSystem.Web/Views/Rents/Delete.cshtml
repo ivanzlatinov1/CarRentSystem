@@ -1,0 +1,15 @@
+﻿@model CarRentSystem.Services.Models.RentModel
+@{
+    ViewData["Title"] = "Delete Rent";
+}
+
+<h2>Delete Rent</h2>
+
+<p>Are you sure you want to delete this rent?</p>
+
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="UserId" />
+    <input type="hidden" asp-for="CarId" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

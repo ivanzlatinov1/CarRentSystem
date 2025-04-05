@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Return Car";
+    var cars = ViewBag.Cars as List<SelectListItem>;
+}
+
+<h2>Return a Rented Car</h2>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        @foreach (var error in ViewData.ModelState[""].Errors)
+        {
+            <p>@error.ErrorMessage</p>
+        }
+    </div>
+}
+
+<form asp-action="ReturnCar" method="post">
+    <div class="form-group">
+        <label for="carId">Car</label>
+        <select id="carId" name="carId" class="form-control" asp-items="cars">
+            <option value="">Select Car</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Return Car</button>
+</form>
+
+<a asp-action="Index">Back to List</a>
