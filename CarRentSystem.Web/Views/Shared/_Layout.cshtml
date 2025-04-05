@@ -9,27 +9,27 @@
     <link rel="stylesheet" href="~/CarRentSystem.Web.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <header style="background: linear-gradient(to right, #0d1b2a, #4a3f35); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark" style="padding: 10px 20px;">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">CarRentSystem</a>
+                <a class="navbar-brand" style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #ffd700;" asp-area="" asp-controller="Home" asp-action="Index">CarRentSystem</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                        aria-expanded="false" aria-label="Toggle navigation" style="border: none;">
+                    <span class="navbar-toggler-icon" style="filter: invert(100%);"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-light" style="font-family: 'Roboto', sans-serif; font-size: 1rem; margin-right: 15px; transition: color 0.3s ease;" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-light" style="font-family: 'Roboto', sans-serif; font-size: 1rem; margin-right: 15px; transition: color 0.3s ease;" asp-area="" asp-controller="Cars" asp-action="Index">Cars</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="Index">Cars</a>
+                            <a class="nav-link text-light" style="font-family: 'Roboto', sans-serif; font-size: 1rem; margin-right: 15px; transition: color 0.3s ease;" asp-area="" asp-controller="Rents" asp-action="Index">Rents</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Users</a>
+                            <a class="nav-link text-light" style="font-family: 'Roboto', sans-serif; font-size: 1rem; margin-right: 15px; transition: color 0.3s ease;" asp-area="" asp-controller="Users" asp-action="Index">Users</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
@@ -37,17 +37,25 @@
             </div>
         </nav>
     </header>
+
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - CarRentSystem
+    <footer style="position: fixed; bottom: 0; width: 100%; height: 10%; background: linear-gradient(to right, #0d1b2a, #4a3f35); color: #fff; box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2); display: flex; justify-content: center; align-items: center;">
+        <div class="text-center">
+            <p style="margin-bottom: 10px; font-family: 'Roboto', sans-serif; font-size: 1rem;">&copy; 2025 - CarRentSystem | All Rights Reserved</p>
+            <div style="margin-top: 10px;">
+                <a href="/privacy-policy" style="color: #ffd700; margin: 0 10px; text-decoration: none; transition: color 0.3s ease;">Privacy Policy</a>
+                <a href="/terms" style="color: #ffd700; margin: 0 10px; text-decoration: none; transition: color 0.3s ease;">Terms of Service</a>
+                <a href="/contact" style="color: #ffd700; margin: 0 10px; text-decoration: none; transition: color 0.3s ease;">Contact Us</a>
+            </div>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

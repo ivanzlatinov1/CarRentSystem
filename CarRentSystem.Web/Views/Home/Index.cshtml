@@ -2,20 +2,29 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to Car-Rent-System!</h1>
-    <div class="d-flex mt-4">
-        <div class="col-4 text-center">
-            <h2>@ViewData["UsersCount"]</h2>
-            <p>Users</p>
+<div class="text-center" style="color: #fff; padding: 20px; border-radius: 10px; margin-top: 80px;">
+    <h1 class="display-4" style="font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 20px;">Welcome to CarRentSystem!</h1>
+    <p style="font-family: 'Roboto', sans-serif; font-size: 1.2rem; line-height: 1.8; margin-bottom: 20px;">
+        Looking to rent a car for your next adventure or business trip? We offer a wide selection of vehicles to suit all your needs. Whether you're looking for a compact city car, a luxury ride, or a family-friendly SUV, we’ve got you covered.
+        With easy booking, flexible rental options, and reliable service, renting a car has never been easier. Start your journey today with CarRentSystem and hit the road with confidence!
+    </p>
+</div>
+
+
+<div class="text-center" style="padding: 20px; border-radius: 10px; color: #fff;">
+    <div class="d-flex mt-4 justify-content-center">
+        <div class="col-4 text-center" style="margin: 10px; padding: 15px; background: rgba(255, 255, 255, 0.2); border-radius: 10px;">
+            <h2 style="font-family: 'Roboto', sans-serif; font-size: 2rem;">@ViewData["UsersCount"]</h2>
+            <p style="font-size: 1.2rem;">Users</p>
         </div>
-        <div class="col-4 text-center">
-            <h2>@ViewData["CarsCount"]</h2>
-            <p>Cars</p>
+        <div class="col-4 text-center" style="margin: 10px; padding: 15px; background: rgba(255, 255, 255, 0.2); border-radius: 10px;">
+            <h2 style="font-family: 'Roboto', sans-serif; font-size: 2rem;">@ViewData["CarsCount"]</h2>
+            <p style="font-size: 1.2rem;">Cars</p>
         </div>
-        <div class="col-4 text-center">
-            <h2>@ViewData["RentsCount"]</h2>
-            <p>Rents</p>
+        <div class="col-4 text-center" style="margin: 10px; padding: 15px; background: rgba(255, 255, 255, 0.2); border-radius: 10px;">
+            <h2 style="font-family: 'Roboto', sans-serif; font-size: 2rem;">@ViewData["RentsCount"]</h2>
+            <p style="font-size: 1.2rem;">Rents</p>
         </div>
     </div>
 </div>
+
