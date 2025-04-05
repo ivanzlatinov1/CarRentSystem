@@ -43,10 +43,5 @@ namespace CarRentSystem.Services.Implementations
         {
             await _rentRepository.UpdateAsync(rentModel.ToEntity());
         }
-
-        public async Task DeleteAsync(RentModel rentModel)
-        {
-            await _rentRepository.DeleteAsync(rentModel.ToEntity());
-        }
     }
 }

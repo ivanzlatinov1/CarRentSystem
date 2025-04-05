@@ -35,12 +35,14 @@ namespace CarRentSystem.Web.Controllers
         }
 
         // GET: /Rents/Edit
-        public IActionResult Edit(string userId, int carId)
+        [Authorize(Roles = "Admin")]
+        public IActionResult Edit()
         {
             return View();
         }
 
         // POST: /Rents/Edit
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(RentModel rentModel)
@@ -97,12 +99,15 @@ namespace CarRentSystem.Web.Controllers
         public async Task<IActionResult> Return()
         {
             var rentedCars = await _rentService.GetAllAsync();
-            var userRentedCars = rentedCars.Where(r => r.UserId == User.Identity?.Name && r.ReturnDate == null).ToList();
+            string? userId = _userService.FindByUsername(User.Identity?.Name).Result?.FirstOrDefault()?.Id;
+            var userRentedCars = rentedCars.Where(r => r.UserId == userId && r.ReturnDate == null).ToList();
 
             ViewBag.Cars = userRentedCars.Select(c => new SelectListItem
             {
                 Value = c.CarId.ToString(),
-                Text = $"{c.Car.Make} {c.Car.Model}, year: {c.Car.Year}"
+                Text = $"{_carService.GetByIdAsync(c.CarId).Result.Make} " +
+                $"{_carService.GetByIdAsync(c.CarId).Result.Model}," +
+                $" year: {_carService.GetByIdAsync(c.CarId).Result.Year}"
             }).ToList();
 
             return View();
@@ -113,7 +118,8 @@ namespace CarRentSystem.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Return(int carId)
         {
-            var result = await _rentService.ReturnCarAsync(User.Identity.Name, carId);
+            string? userId = _userService.FindByUsername(User.Identity?.Name).Result?.FirstOrDefault()?.Id;
+            var result = await _rentService.ReturnCarAsync(userId, carId);
 
             if (result == "The car is not rented or it has already been returned.")
             {
@@ -122,21 +128,6 @@ namespace CarRentSystem.Web.Controllers
                 return View();
             }
 
-            return RedirectToAction(nameof(Index));
-        }
-
-        // GET: /Rents/Delete
-        public IActionResult Delete(string userId, int carId)
-        {
-            return View(); // Views/Rents/Delete.cshtml
-        }
-
-        // POST: /Rents/Delete
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(RentModel rentModel)
-        {
-            await _rentService.DeleteAsync(rentModel);
             return RedirectToAction(nameof(Index));
         }
 

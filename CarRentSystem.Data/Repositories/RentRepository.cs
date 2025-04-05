@@ -46,7 +46,7 @@ namespace CarRentSystem.Data.Repositories
             if (rent == null || rent.ReturnDate != null)
                 return "The car is not rented or it has already been returned.";
 
-            rent.ReturnDate = DateTime.Now;
+            _set.Remove(rent);
             await context.SaveChangesAsync();
 
             return "Car returned successfully.";
@@ -55,12 +55,6 @@ namespace CarRentSystem.Data.Repositories
         public async Task UpdateAsync(Rent rent)
         {
             _set.Update(rent);
-            await context.SaveChangesAsync();
-        }
-
-        public async Task DeleteAsync(Rent rent)
-        {
-            _set.Remove(rent);
             await context.SaveChangesAsync();
         }
     }

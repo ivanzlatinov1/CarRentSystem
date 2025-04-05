@@ -17,13 +17,19 @@
 
 <div class="d-flex justify-content-center align-items-center"
      style="background: linear-gradient(to right, #0d1b2a, #4a3f35); border-radius: 10px; padding: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); color: #fff; width: 50%; margin: 0 auto;">
-    <form asp-action="ReturnCar" method="post" style="width: 100%;">
+    <form asp-action="Return" method="post" style="width: 100%;">
         <div class="form-group mb-3">
             <label for="carId" style="font-family: 'Roboto', sans-serif; color: #ffd700;">Car</label>
-            <select id="carId" name="carId" class="form-control" asp-items="cars"
-                    style="background: rgba(0, 0, 0, 0.8); color: #fff; border: none; border-bottom: 2px solid #ffd700; padding-left: 10px;">
-                <option value="" style="color: #fff; background: rgba(0, 0, 0, 0.8);">Select Car</option>
-            </select>
+            @if (cars != null && cars.Any())
+            {
+                <select id="carId" name="carId" class="form-control" asp-items="cars">
+                    <option value="" style="color: #fff; background: rgba(0, 0, 0, 0.8);">Select Car</option>
+                </select>
+            }
+            else
+            {
+                <p>No cars available for return.</p>
+            }
         </div>
         <button type="submit" class="btn btn-lg"
                 style="background: #ffd700; color: #0d1b2a; border: none; font-family: 'Roboto', sans-serif; width: 100%; margin-top: 20px;">

@@ -9,6 +9,5 @@ namespace CarRentSystem.Services.Contracts
         public Task<ICollection<RentModel>> GetAllAsync();
         public Task<RentModel?> GetByIdAsync(string userId, int carId);
         public Task UpdateAsync(RentModel rentModel);
-        public Task DeleteAsync(RentModel rentModel);
     }
 }
