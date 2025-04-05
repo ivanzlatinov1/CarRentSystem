@@ -63,7 +63,7 @@
                     @Html.DisplayFor(modelItem => item.Price)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ImageUrl)
+                    <img src="~/images/@Html.DisplayFor(modelItem => item.ImageUrl)" alt="@item.Make + ' ' + @item.Model" width="200" />
                 </td>
                 @if (isAuthenticated)
                 {

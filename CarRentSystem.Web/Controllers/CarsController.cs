@@ -1,5 +1,6 @@
 ﻿using CarRentSystem.Services.Contracts;
 using CarRentSystem.Services.Models;
+using CarRentSystem.Web.Utilities;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,9 +9,10 @@ using Microsoft.EntityFrameworkCore;
 namespace CarRentSystem.Web.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class CarsController(ICarService service) : Controller
+    public class CarsController(ICarService service, IWebHostEnvironment environment) : Controller
     {
         private readonly ICarService _service = service;
+        private readonly IWebHostEnvironment _environment = environment;
 
         // GET: Cars
         [AllowAnonymous]
@@ -54,10 +56,16 @@ namespace CarRentSystem.Web.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Make,Model,Year,Seats,Description,Price,ImageUrl,Id")] CarModel car)
+        public async Task<IActionResult> Create(CarModel car)
         {
             if (ModelState.IsValid)
             {
+                if (car.Image != null && car.Image.Length > 0)
+                {
+                    var newFileName = await FileUpload.UploadAsync(car.Image, _environment.WebRootPath);
+                    car.ImageUrl = newFileName;
+                }
+
                 await _service.AddAsync(car);
                 return RedirectToAction(nameof(Index));
             }
@@ -85,7 +93,7 @@ namespace CarRentSystem.Web.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Make,Model,Year,Seats,Description,Price,ImageUrl,Id")] CarModel car)
+        public async Task<IActionResult> Edit(int id, CarModel car)
         {
             if (id != car.Id)
             {
