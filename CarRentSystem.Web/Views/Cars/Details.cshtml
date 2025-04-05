@@ -4,57 +4,36 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1 class="text-center" style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #ffd700; margin-bottom: 10px; margin-top: 40px;">@Model.Make @Model.Model - Details</h1>
 
-<div>
-    <h4>Car</h4>
-    <hr />
+<div class="d-flex justify-content-center" style="background: linear-gradient(to right, #0d1b2a, #4a3f35); border-radius: 10px; padding: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); color: #fff; width: 75%; margin: 0 auto;">
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Make)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Make)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Model)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Model)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Year)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Year)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Seats)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Seats)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ImageUrl)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ImageUrl)
+        <dt class="col-sm-3" style="font-family: 'Roboto', sans-serif; font-weight: bold; color: #ffd700;">@Html.DisplayNameFor(model => model.Make)</dt>
+        <dd class="col-sm-9" style="font-family: 'Roboto', sans-serif; color: #fff;">@Html.DisplayFor(model => model.Make)</dd>
+
+        <dt class="col-sm-3" style="font-family: 'Roboto', sans-serif; font-weight: bold; color: #ffd700;">@Html.DisplayNameFor(model => model.Model)</dt>
+        <dd class="col-sm-9" style="font-family: 'Roboto', sans-serif; color: #fff;">@Html.DisplayFor(model => model.Model)</dd>
+
+        <dt class="col-sm-3" style="font-family: 'Roboto', sans-serif; font-weight: bold; color: #ffd700;">@Html.DisplayNameFor(model => model.Year)</dt>
+        <dd class="col-sm-9" style="font-family: 'Roboto', sans-serif; color: #fff;">@Html.DisplayFor(model => model.Year)</dd>
+
+        <dt class="col-sm-3" style="font-family: 'Roboto', sans-serif; font-weight: bold; color: #ffd700;">@Html.DisplayNameFor(model => model.Seats)</dt>
+        <dd class="col-sm-9" style="font-family: 'Roboto', sans-serif; color: #fff;">@Html.DisplayFor(model => model.Seats)</dd>
+
+        <dt class="col-sm-3" style="font-family: 'Roboto', sans-serif; font-weight: bold; color: #ffd700;">@Html.DisplayNameFor(model => model.Description)</dt>
+        <dd class="col-sm-9" style="font-family: 'Roboto', sans-serif; color: #fff;">@Html.DisplayFor(model => model.Description)</dd>
+
+        <dt class="col-sm-3" style="font-family: 'Roboto', sans-serif; font-weight: bold; color: #ffd700;">@Html.DisplayNameFor(model => model.Price)</dt>
+        <dd class="col-sm-9" style="font-family: 'Roboto', sans-serif; color: #fff;">@Html.DisplayFor(model => model.Price)$</dd>
+
+        <dt class="col-sm-3" style="font-family: 'Roboto', sans-serif; font-weight: bold; color: #ffd700;">@Html.DisplayNameFor(model => model.Image)</dt>
+        <dd class="col-sm-9">
+            <img src="~/images/@Html.DisplayFor(model => model.ImageUrl)" alt="Car Image" style="max-width: 300px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);" />
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+<div class="text-center mt-4">
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-lg" style="background: #ffd700; color: #0d1b2a; border: none; font-family: 'Roboto', sans-serif; margin-right: 10px;">Edit</a>
+    <a asp-action="Index" class="btn btn-lg" style="background: #ffd700; color: #0d1b2a; border: none; font-family: 'Roboto', sans-serif;">Back to List</a>
 </div>

@@ -5,26 +5,27 @@
     bool isAuthenticated = User.Identity?.IsAuthenticated ?? false;
 }
 
-<h1 class="text-center">@ViewData["Title"]</h1>
+<h1 class="text-center" style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #ffd700; margin-bottom: 30px;">@ViewData["Title"]</h1>
 
 <form asp-action="Index" method="get">
     <div class="container text-center mt-4">
-        <div class="d-flex col-5 align-content-around flex-nowrap mx-auto">
-            <input class="form-control col-8 mx-2" type="text" name="search" placeholder="Search a car by its make or model" value="@ViewData["Search"]" />
-            <input class="btn btn-primary col-2" type="submit" value="Search" />
+        <div class="d-flex col-md-6 align-content-around flex-nowrap mx-auto">
+            <input class="form-control col-9 mx-2" type="text" name="search" placeholder="Search a car by its make or model" value="@ViewData["Search"]"
+                   style="background: rgba(255, 255, 255, 0.2); color: #fff; border: none; border-bottom: 2px solid #ffd700;" />
+            <input class="btn" type="submit" value="Search" style="background: #ffd700; color: #0d1b2a; border: none;" />
         </div>
     </div>
 </form>
 
-<div class="container mt-4">
+<div class="container mt-4" style="background: rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
     @if (isAuthenticated)
     {
         <div class="text-center mb-3">
-            <a asp-action="Create" class="btn btn-primary">Create New</a>
+            <a asp-action="Create" class="btn" style="background: #ffd700; color: #0d1b2a; border: none;">Create New</a>
         </div>
     }
-    <table class="table table-striped table-bordered text-center">
-        <thead class="thead-light">
+    <table class="table text-center table-striped" style="color: #fff; border-bottom-color: #ffd700; border-radius: 10px; overflow: hidden;">
+        <thead style="background: #0d1b2a; color: #ffd700;">
             <tr>
                 <th>@Html.DisplayNameFor(model => model.Make)</th>
                 <th>@Html.DisplayNameFor(model => model.Model)</th>
@@ -36,23 +37,26 @@
                 }
             </tr>
         </thead>
-        <tbody>
+        <tbody style="background: none; color: white;">
             @foreach (var item in Model)
             {
-                <tr>
+                <tr class="text-white">
                     <td>@Html.DisplayFor(modelItem => item.Make)</td>
                     <td>@Html.DisplayFor(modelItem => item.Model)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Price)$</td>
                     <td>
-                        <img src="~/images/@Html.DisplayFor(modelItem => item.ImageUrl)" alt="@item.Make @item.Model" width="200" />
+                        <img src="~/images/@Html.DisplayFor(modelItem => item.ImageUrl)" alt="@item.Make @item.Model" style="width: 150px; border-radius: 10px;" />
                     </td>
                     @if (isAuthenticated)
                     {
                         <td>
                             <div class="d-flex flex-column">
-                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning mb-2">Edit</a>
-                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info mb-2">Details</a>
-                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm"
+                                   style="background: #ffd700; color: #0d1b2a; border: none; margin-bottom: 10px;">Edit</a>
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm"
+                                   style="background: #ffd700; color: #0d1b2a; border: none; margin-bottom: 10px;">Details</a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm"
+                                   style="background: #ff4500; color: #fff; border: none;">Delete</a>
                             </div>
                         </td>
                     }
@@ -60,4 +64,5 @@
             }
         </tbody>
     </table>
+
 </div>
